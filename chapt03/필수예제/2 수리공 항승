@@ -1,0 +1,17 @@
+#수리공 항승 (pg 65)/ 백준:boj.kr/1449
+
+coord = [False] * 1001
+N, L = map(int, input().split())
+for i in map (int, input().split()): #물이 새는 위치 입력받음
+  coord[i]=True
+
+ans=0 #필요한 테이프의 개수 = 답
+x=0 #배열 내 위치
+while x <= 1000:
+  if coord[x]: #True일때, 구멍이 있을 때
+    ans+=1
+    x+=L #테이프 길이만큼 건너뛰기
+  else:
+    x+=1
+
+print(ans)
