@@ -1,0 +1,46 @@
+#02 후위 표기식
+#딕셔너리 + 스택  (후위연산식) 활용
+
+n = int(input())  # 피연산자 개수
+expression = input()  # 후위 표기식
+
+values = {}
+for i in range(n):
+    operand = input().strip()
+    while True:
+        try:
+            value = float(input())
+            break  # 유효한 부동소수점 값을 얻었으면 루프를 종료합니다.
+        except ValueError:
+            print("유효한 숫자를 입력하세요.")  # 부동소수점이 아닌 입력을 다시 요청합니다.
+    values[operand] = value
+    break
+
+
+def postfix_evaluation(expression, values):
+    stack = []
+
+    for char in expression:
+        if char.isalpha():  # 피연산자인 경우 (islpha는 char가 char인지 확인)
+            operand = values[char]  # 해당 변수에 대응하는 값을 가져옵니다.
+            stack.append(operand)
+        else:  # 연산자인 경우
+            operand2 = stack.pop()
+            operand1 = stack.pop()
+            if char == '+':
+                result = operand1 + operand2
+            elif char == '-':
+                result = operand1 - operand2
+            elif char == '*':
+                result = operand1 * operand2
+            elif char == '/':
+                result = operand1 / operand2
+            stack.append(result)
+
+    return stack[0]
+
+# 후위 표기식 계산
+result = postfix_evaluation(expression, values)
+
+# 결과 출력 (소수점 둘째 자리까지)
+print(f'{result:.2f}')
