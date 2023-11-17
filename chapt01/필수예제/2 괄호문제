@@ -1,0 +1,16 @@
+#괄호문제 (VPS): pg29
+for i in range(int(input())):
+  stk=[]
+  ans='yes'
+  for c in input():
+    if c=='(':
+      stk.append(c)
+    else:
+      if len(stk)>0:
+        stk.pop()
+      else:
+        ans='no'
+
+  if len(stk)>0:
+    ans='no'
+  print(ans)
