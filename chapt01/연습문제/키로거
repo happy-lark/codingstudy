@@ -1,0 +1,24 @@
+#01 키로거 > stack 활용
+test_cases = int(input()) #테스트 케이스 개수
+
+for _ in range(test_cases):
+    left_stack = []  # 커서 왼쪽에 있는 문자들을 저장하는 스택
+    right_stack = []  # 커서 오른쪽에 있는 문자들을 저장하는 스택
+    data = input()
+
+    for char in data:
+        if char == '-':  # 백스페이스
+            if left_stack:
+                left_stack.pop()
+        elif char == '<':  # 화살표 왼쪽
+            if left_stack:
+                right_stack.append(left_stack.pop())
+        elif char == '>':  # 화살표 오른쪽
+            if right_stack:
+                left_stack.append(right_stack.pop())
+        else:
+            left_stack.append(char)
+
+    left_stack.extend(reversed(right_stack))  # 왼쪽 스택에 오른쪽 스택을 역순으로 추가
+
+    print(''.join(left_stack)) #left_stack의 원소들을 하나의 문자열(string)으로 합침/ ''은 seperator
