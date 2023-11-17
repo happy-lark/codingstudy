@@ -1,0 +1,22 @@
+#베스트셀러: pg40
+#map 활용
+
+books=dict()
+
+for i in range(int(input())):
+  name=input()
+  if name in books:
+    books[name]+=1
+  else:
+    books[name]=1
+
+max_val=max(books.values()) #가장 많이 입력된 책 찾기 (key with the biggest value)
+
+#가장 많이 팔린 책이 중복될 경우, 즉 팔린 횟수가 중복될 경우를 위함
+arr=[] #가장 많이 팔린 책 리스트
+for k, v in books.items():
+  if v == max_val:
+    arr.append(k)
+
+arr.sort() #오름차순 정렬
+print(arr[0])
