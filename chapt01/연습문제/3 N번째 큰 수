@@ -1,0 +1,33 @@
+#03 N번째 큰 수
+#matrix, 힙 활용
+import heapq
+
+def find_nth_largest(matrix, n):
+    heap = []  # 최소 힙을 사용할 리스트
+
+    # 첫 번째 행의 모든 요소를 힙에 추가
+    for num in matrix[0]:
+        heapq.heappush(heap, num)
+
+    # 다음 행부터 처리
+    for row in matrix[1:]:
+        for num in row:
+            heapq.heappushpop(heap, num)  # 현재 행의 수를 추가하고 가장 작은 수를 제거
+
+    # N번째 큰 수 반환
+    return heapq.heappop(heap)
+
+# 입력 처리
+n = int(input())  # 표의 행과 열의 개수
+matrix = []
+
+# 표의 값 입력
+for _ in range(n):
+    row = list(map(int, input().split()))
+    matrix.append(row)
+
+# N번째 큰 수 찾기
+nth_largest = find_nth_largest(matrix, n)
+
+# 결과 출력
+print(nth_largest)
